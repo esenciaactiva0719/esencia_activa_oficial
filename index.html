@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esencia Activa Oficial</title>
+    <!-- Incluye Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #FFD1DC, #B0E0E6, #98FB98); /* Degradado suave: rosa a menta */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #2C3E50; /* Azul profundo profesional */
+        }
+        .container {
+            max-width: 800px;
+            width: 95%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-sizing: border-box;
+        }
+        .btn {
+            background: linear-gradient(to right, #FFD1DC, #98FB98); /* Degradado rosa a menta */
+            color: #2C3E50;
+            padding: 0.8rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(to right, #FFC0CB, #7CFC00); /* Ligeramente más vibrante al pasar el ratón */
+        }
+        .social-icon {
+            color: #2C3E50;
+            transition: color 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #FFD1DC; /* Rosa claro al pasar el ratón */
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #FFD1DC; /* Borde rosa claro */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #B0E0E6; /* Borde azul claro */
+        }
+        .product-test-btn {
+            background-color: #B0E0E6; /* Azul pastel */
+            color: #2C3E50;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .product-test-btn:hover {
+            background-color: #87CEEB; /* Azul más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+        }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Posición fija para cubrir toda la pantalla */
+            z-index: 1000; /* Por encima de todo lo demás */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Habilitar scroll si el contenido es muy largo */
+            background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente oscuro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #2C3E50;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FFD1DC; /* Rosa claro */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Oculto por defecto */
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <!-- Encabezado -->
+        <header class="flex flex-col md:flex-row items-center justify-between mb-8">
+            <div class="mb-4 md:mb-0">
+                <!-- Logo circular (Esencia_Activa_Oficial) -->
+                <img src="https://placehold.co/80x80/FFD1DC/2C3E50?text=Logo" alt="Logo Esencia Activa Oficial" class="logo-img mx-auto md:mx-0">
+            </div>
+            <div class="flex-grow">
+                <!-- Foto tuya sonriente -->
+                <img src="IMG-20250722-WA0003.jpg" alt="Andrea Katherine Laguado" class="profile-img mx-auto">
+            </div>
+            <div class="mt-4 md:mt-0">
+                <!-- Espacio para el diseño, si es necesario, o para mantener el equilibrio -->
+            </div>
+        </header>
+
+        <!-- Frase de bienvenida -->
+        <section class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">"Nutrición, energía y bienestar en una sola esencia."</h1>
+            <p class="text-lg md:text-xl text-gray-700">Distribuidora internacional de productos FuXion</p>
+        </section>
+
+        <!-- Sobre ti -->
+        <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h2 class="text-2xl font-semibold mb-3 text-blue-900">Sobre mí</h2>
+            <p class="text-md md:text-lg mb-2"><strong>Andrea Katherine Laguado</strong></p>
+            <p class="text-md md:text-lg mb-2">Ing. Biotecnológica - Creadora de <a href="https://www.instagram.com/kt.kt.19" target="_blank" class="text-pink-600 hover:underline">@kt.kt.19</a></p>
+            <p class="text-md md:text-lg mb-4">Asesora certificada FuXion</p>
+            <p class="text-md md:text-lg mb-2"><strong class="text-green-700">Distribución en más de 30 países 🌍</strong></p>
+            <p class="text-md md:text-lg">📦 Dropshipping disponible</p>
+        </section>
+
+        <!-- Botones interactivos -->
+        <section class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="https://fuxion.com/catalogo" target="_blank" class="btn">
+                <i class="fas fa-shopping-bag"></i> Ver Catálogo FuXion
+            </a>
+            <a href="https://wa.me/573502025515?text=Hola%20Andrea%2C%20vi%20tu%20p%C3%A1gina%20Esencia%20Activa%20y%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20productos%20FuXion." target="_blank" class="btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp: Asesoría personalizada
+            </a>
+            <a href="#" class="btn">
+                <i class="fas fa-star"></i> Testimonios y Resultados
+            </a>
+            <a href="https://wa.me/573502025515?text=Hola%20Andrea%2C%20quiero%20hacer%20un%20pedido%20r%C3%A1pido%20de%20productos%20FuXion." target="_blank" class="btn">
+                <i class="fas fa-truck"></i> Pedidos Rápidos
+            </a>
+            <a href="https://www.instagram.com/esencia_activa_oficial" target="_blank" class="btn col-span-1 md:col-span-2">
+                <i class="fab fa-instagram text-3xl"></i> Sígueme en Instagram: @esencia_activa_oficial
+            </a>
+            <a href="https://fuxion.com/andrealaguado" target="_blank" class="btn col-span-1 md:col-span-2">
+                <i class="fas fa-store"></i> Visita mi tienda oficial
+            </a>
+        </section>
+
+        <!-- Sección "¿Cuál producto es ideal para ti?" -->
+        <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-900">¿Cuál producto es ideal para ti?</h2>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="product-test-btn" data-category="Energía">Energía</button>
+                <button class="product-test-btn" data-category="Digestión">Digestión</button>
+                <button class="product-test-btn" data-category="Control de peso">Control de peso</button>
+                <button class="product-test-btn" data-category="Detox">Detox</button>
+                <button class="product-test-btn" data-category="Antioxidantes">Antioxidantes</button>
+            </div>
+        </section>
+
+        <!-- Redes sociales y contacto -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-900">Redes Sociales y Contacto</h2>
+            <div class="flex justify-center space-x-6 text-3xl">
+                <a href="https://www.instagram.com/esencia_activa_oficial" target="_blank" class="social-icon hover:text-pink-600">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@esencia_activa_oficial" target="_blank" class="social-icon hover:text-gray-800">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/573502025515" target="_blank" class="social-icon hover:text-green-500">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            <p class="text-md md:text-lg mt-4">WhatsApp: +57 3502025515</p>
+            <p class="text-md md:text-lg">Web oficial: <a href="https://fuxion.com/andrealaguado" target="_blank" class="text-blue-600 hover:underline">fuxion.com/andrealaguado</a></p>
+        </section>
+
+        <!-- Frase de conexión emocional -->
+        <section class="mt-8 p-6 bg-pink-50 rounded-lg shadow-md">
+            <p class="text-xl md:text-2xl italic font-medium text-blue-900">"No vendo productos. Transformo hábitos con ciencia y bienestar."</p>
+        </section>
+    </div>
+
+    <!-- Modal para el Asesor de Bienestar con IA -->
+    <div id="aiWellnessAdvisorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 class="text-2xl font-bold mb-4 text-blue-900">✨ Asesor de Bienestar con IA</h3>
+            <p class="mb-4 text-gray-700">Explícame tus necesidades relacionadas con <span id="modalCategory" class="font-semibold text-pink-600"></span> y te daré una sugerencia personalizada.</p>
+            <textarea id="userInput" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-pink-300 outline-none" rows="5" placeholder="Ej: Me siento cansado por las tardes y necesito un impulso. ¿Qué producto me recomiendas?"></textarea>
+            <button id="generateSuggestionBtn" class="btn w-full mb-4">
+                <i class="fas fa-magic"></i> Generar Sugerencia
+            </button>
+            <div id="loadingSpinner" class="loading-spinner"></div>
+            <div id="aiResponse" class="p-4 bg-blue-50 rounded-lg text-left text-gray-800 border border-blue-200 mt-4 hidden">
+                <h4 class="font-semibold mb-2">Respuesta de la IA:</h4>
+                <p id="aiResponseText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para abrir el modal
+        function openModal(category) {
+            document.getElementById('modalCategory').textContent = category;
+            document.getElementById('aiWellnessAdvisorModal').style.display = 'flex';
+            document.getElementById('userInput').value = ''; // Limpiar input anterior
+            document.getElementById('aiResponse').classList.add('hidden'); // Ocultar respuesta anterior
+            document.getElementById('aiResponseText').textContent = ''; // Limpiar texto de respuesta
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('aiWellnessAdvisorModal').style.display = 'none';
+        }
+
+        // Event listeners para los botones de categoría
+        document.querySelectorAll('.product-test-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                openModal(category);
+            });
+        });
+
+        // Lógica para la llamada a la API de Gemini
+        document.getElementById('generateSuggestionBtn').addEventListener('click', async () => {
+            const category = document.getElementById('modalCategory').textContent;
+            const userInput = document.getElementById('userInput').value;
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const aiResponseDiv = document.getElementById('aiResponse');
+            const aiResponseText = document.getElementById('aiResponseText');
+
+            if (!userInput.trim()) {
+                aiResponseText.textContent = 'Por favor, describe tus necesidades para obtener una sugerencia.';
+                aiResponseDiv.classList.remove('hidden');
+                return;
+            }
+
+            loadingSpinner.style.display = 'block'; // Mostrar spinner
+            aiResponseDiv.classList.add('hidden'); // Ocultar respuesta anterior
+            aiResponseText.textContent = ''; // Limpiar texto de respuesta
+
+            const prompt = `Como asesor de bienestar de Esencia Activa, especializado en productos FuXion, basado en la categoría "${category}" y la siguiente descripción del usuario: "${userInput}", proporciona una sugerencia personalizada. Incluye por qué un producto FuXion de esa categoría podría ser beneficioso y un consejo general de bienestar. Responde de forma concisa y amigable.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // La clave API será proporcionada por el entorno de Canvas
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error de la API: ${response.status} ${response.statusText}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    aiResponseText.textContent = text;
+                    aiResponseDiv.classList.remove('hidden');
+                } else {
+                    aiResponseText.textContent = 'Lo siento, no pude generar una sugerencia en este momento. Intenta de nuevo.';
+                    aiResponseDiv.classList.remove('hidden');
+                    console.error('Estructura de respuesta inesperada:', result);
+                }
+            } catch (error) {
+                aiResponseText.textContent = 'Hubo un error al conectar con el Asesor de IA. Por favor, inténtalo más tarde.';
+                aiResponseDiv.classList.remove('hidden');
+                console.error('Error al llamar a la API de Gemini:', error);
+            } finally {
+                loadingSpinner.style.display = 'none'; // Ocultar spinner
+            }
+        });
+    </script>
+</body>
+</html>
