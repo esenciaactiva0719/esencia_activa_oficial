@@ -185,7 +185,7 @@
             <a href="https://fuxion.com/catalogo" target="_blank" class="btn">
                 <i class="fas fa-shopping-bag"></i> Ver Catálogo FuXion
             </a>
-            <a href="https://wa.me/573502025515?text=Hola%20Andrea%2C%20vi%20tu%20p%C3%A1gina%20Esencia%20Activa%20y%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20productos%20FuXion." target="_blank" class="btn">
+            <a href="https://wa.me/573502025515?text=Hola%20Andrea%2C%20vi%20tu%20p%C3%A1gina%20Esencia%20Activa%20y%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20productos%20FuXion." target="_[...]
                 <i class="fab fa-whatsapp"></i> WhatsApp: Asesoría personalizada
             </a>
             <a href="#" class="btn">
@@ -244,7 +244,7 @@
             <span class="close-button" onclick="closeModal()">&times;</span>
             <h3 class="text-2xl font-bold mb-4 text-blue-900">✨ Asesor de Bienestar con IA</h3>
             <p class="mb-4 text-gray-700">Explícame tus necesidades relacionadas con <span id="modalCategory" class="font-semibold text-pink-600"></span> y te daré una sugerencia personalizada.</p>
-            <textarea id="userInput" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-pink-300 outline-none" rows="5" placeholder="Ej: Me siento cansado por las tardes y necesito un impulso. ¿Qué producto me recomiendas?"></textarea>
+            <textarea id="userInput" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-pink-300 outline-none" rows="5" placeholder="Ej: Me siento cansado por las tardes [...]
             <button id="generateSuggestionBtn" class="btn w-full mb-4">
                 <i class="fas fa-magic"></i> Generar Sugerencia
             </button>
@@ -297,7 +297,7 @@
             aiResponseDiv.classList.add('hidden'); // Ocultar respuesta anterior
             aiResponseText.textContent = ''; // Limpiar texto de respuesta
 
-            const prompt = `Como asesor de bienestar de Esencia Activa, especializado en productos FuXion, basado en la categoría "${category}" y la siguiente descripción del usuario: "${userInput}", proporciona una sugerencia personalizada. Incluye por qué un producto FuXion de esa categoría podría ser beneficioso y un consejo general de bienestar. Responde de forma concisa y amigable.`;
+            const prompt = `Como asesor de bienestar de Esencia Activa, especializado en productos FuXion, basado en la categoría "${category}" y la siguiente descripción del usuario: "${userInput}"[...]
 
             let chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
